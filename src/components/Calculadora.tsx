@@ -1,30 +1,34 @@
 import { ReactNode, useState } from "react";
+import { useCalculadora } from "../contexts/CalculadoraProvider";
+import { BotaoOperacao } from "./BotaoOperacao";
+
+const NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export function Calculadora() {
   const [operacaoAtual, setOperacaoAtual] = useState<string>("");
-  const [resultado, setResutaldo] = useState<number>();
+  const { setCalculo, resultado, setResultado } = useCalculadora();
 
-  const createOperacaoAtual = (numero: string) => {
-    setOperacaoAtual((curValue) => curValue + numero);
+  const createOperacaoAtual = (valor: string) => {
+    if (!parseFloat(valor)) calculate();
+    setOperacaoAtual((curValue) => curValue + valor);
+    setCalculo((curValue) => curValue + valor);
   };
 
   const calculate = () => {
-    setResutaldo(eval(operacaoAtual));
+    setResultado(eval(operacaoAtual));
   };
 
   const createKeypad = (): ReactNode => {
     return (
       <div className="grid grid-cols-3 gap-4 w-full">
-        {Array(9)
-          .fill("x")
-          .map((item: string, index: number) => (
-            <div
-              className="btn-calculadora"
-              onClick={() => createOperacaoAtual((index + 1).toString())}
-            >
-              {index + 1}
-            </div>
-          ))}
+        {NUMBERS.map((number: number) => (
+          <div
+            className="btn-calculadora"
+            onClick={() => createOperacaoAtual(number.toString())}
+          >
+            {number}
+          </div>
+        ))}
       </div>
     );
   };
@@ -32,20 +36,20 @@ export function Calculadora() {
   return (
     <div
       id="calculadora"
-      className="w-[300px] h-[420px] bg-gray-500 p-6 flex flex-col align-center gap-8 shadow-2xl rounded"
+      className="w-[300px] h-[400px] bg-gray-500 p-6 flex flex-col align-center gap-8 shadow-2xl rounded"
     >
       <div
         id="visor"
-        className="bg-green-900 w-full h-[70px] relative flex flex-col"
+        className="bg-green-900 w-full h-[70px] relative flex flex-col visorFont overflow-hidden"
       >
         <div className="absolute bottom-1 right-2">
-          <div id="valores-visor" className="text-gray-300 text-lg">
-            {operacaoAtual}
+          <div id="valores-visor" className="text-gray-300 text-xl">
+            <p className="whitespace-nowrap">{operacaoAtual}</p>
           </div>
           {resultado && (
             <div
               id="valores-visor"
-              className="text-gray-300 text-2xl text-right"
+              className="text-gray-300 text-3xl text-right"
             >
               {resultado}
             </div>
@@ -56,9 +60,10 @@ export function Calculadora() {
         <div id="numbers">
           {createKeypad()}
           <div id="last-line" className="flex pt-4 gap-4">
-            <div className="btn-calculadora">0</div>
+            <BotaoOperacao createOperacao={createOperacaoAtual} valor={"0"} />
+            <BotaoOperacao createOperacao={createOperacaoAtual} valor={"."} />
             <div
-              className="btn-calculadora w-full bg-orange-500 hover:bg-orange-400"
+              className="btn-calculadora bg-orange-500 hover:bg-orange-400"
               onClick={calculate}
             >
               =
@@ -67,30 +72,10 @@ export function Calculadora() {
         </div>
 
         <div id="operations" className="flex flex-col gap-4">
-          <div
-            className="btn-calculadora"
-            onClick={() => createOperacaoAtual(" + ")}
-          >
-            +
-          </div>
-          <div
-            className="btn-calculadora"
-            onClick={() => createOperacaoAtual(" - ")}
-          >
-            -
-          </div>
-          <div
-            className="btn-calculadora pt-2"
-            onClick={() => createOperacaoAtual(" * ")}
-          >
-            *
-          </div>
-          <div
-            className="btn-calculadora"
-            onClick={() => createOperacaoAtual(" / ")}
-          >
-            /
-          </div>
+          <BotaoOperacao createOperacao={createOperacaoAtual} valor={" + "} />
+          <BotaoOperacao createOperacao={createOperacaoAtual} valor={" - "} />
+          <BotaoOperacao createOperacao={createOperacaoAtual} valor={" * "} />
+          <BotaoOperacao createOperacao={createOperacaoAtual} valor={" / "} />
         </div>
       </div>
     </div>
