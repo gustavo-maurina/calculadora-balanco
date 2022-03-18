@@ -28,7 +28,13 @@ export function CalculadoraProvider(props: any) {
   const [resultado, setResultado] = useState<number | null>(null);
 
   const calculate = () => {
-    const strSplit = calculo.split(" ");
+    let strSplit = calculo.split(" ");
+    strSplit = strSplit.filter((str) => str !== ""); // remover espaços vazios do Array
+
+    if (!parseFloat(strSplit[strSplit.length - 1]))
+      strSplit = strSplit.slice(0, strSplit.length - 1); // remover sinais do final da string
+
+    // remover 0 do inicio dos numeros
     const strSem0NoInicio = strSplit
       .map((numero) =>
         numero[0] === "0" ? numero.slice(1, numero.length) : numero

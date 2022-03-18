@@ -18,7 +18,11 @@ export function KeyboardListener() {
         return;
 
       if (e.key === "Backspace")
-        return setCalculo((atual) => atual.slice(0, calculo.length - 1));
+        return setCalculo((atual) =>
+          atual[atual.length - 1] === " "
+            ? atual.slice(0, calculo.length - 3)
+            : atual.slice(0, calculo.length - 1)
+        );
 
       if (e.key === "+" || e.key === "-" || e.key === "/" || e.key === "*")
         return setCalculo((atual) => atual + ` ${e.key} `);
