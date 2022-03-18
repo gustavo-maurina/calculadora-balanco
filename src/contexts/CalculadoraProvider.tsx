@@ -18,19 +18,24 @@ const CalculadoraContext = createContext<CalculadoraContextProps>(
   {} as CalculadoraContextProps
 );
 
+export const useCalculadora = () => {
+  const context = useContext(CalculadoraContext);
+  return context;
+};
+
 export function CalculadoraProvider(props: any) {
   const [calculo, setCalculo] = useState<string>("");
   const [resultado, setResultado] = useState<number | null>(null);
 
   const calculate = () => {
-    const stringSplit = calculo.split(" ");
-    const stringRemovendo0DoInicio = stringSplit
+    const strSplit = calculo.split(" ");
+    const strSem0NoInicio = strSplit
       .map((numero) =>
         numero[0] === "0" ? numero.slice(1, numero.length) : numero
       )
       .join("");
 
-    setResultado(eval(stringRemovendo0DoInicio));
+    setResultado(eval(strSem0NoInicio));
   };
 
   return (
@@ -41,8 +46,3 @@ export function CalculadoraProvider(props: any) {
     </CalculadoraContext.Provider>
   );
 }
-
-export const useCalculadora = () => {
-  const context = useContext(CalculadoraContext);
-  return context;
-};
