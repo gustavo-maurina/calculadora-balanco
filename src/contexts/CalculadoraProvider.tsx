@@ -22,7 +22,16 @@ export function CalculadoraProvider(props: any) {
   const [calculo, setCalculo] = useState<string>("");
   const [resultado, setResultado] = useState<number | null>(null);
 
-  const calculate = () => setResultado(eval(calculo));
+  const calculate = () => {
+    const stringSplit = calculo.split(" ");
+    const stringRemovendo0DoInicio = stringSplit
+      .map((numero) =>
+        numero[0] === "0" ? numero.slice(1, numero.length) : numero
+      )
+      .join("");
+
+    setResultado(eval(stringRemovendo0DoInicio));
+  };
 
   return (
     <CalculadoraContext.Provider

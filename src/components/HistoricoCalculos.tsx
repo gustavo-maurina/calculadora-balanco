@@ -5,8 +5,10 @@ export function HistoricoCalculos() {
   const { calculo, setCalculo, resultado, setResultado } = useCalculadora();
 
   const editCalculo = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
     let splitCalc = calculo.split(" ");
-    splitCalc[parseInt(e.target.id)] = e.target.value.toString();
+    splitCalc[parseInt(e.target.id)] = inputValue.length ? inputValue : "0";
     let stringCalc = splitCalc.join(" ");
     setCalculo(stringCalc);
     setResultado(eval(stringCalc));
@@ -44,7 +46,7 @@ export function HistoricoCalculos() {
       <div id="historico" className="text-gray-300 text-4xl pb-12">
         {createHistorico()}
       </div>
-      {resultado && (
+      {resultado !== null && calculo.length > 0 && (
         <div className="text-5xl text-green-400 absolute bottom-3 right-3">
           ={resultado}
         </div>
