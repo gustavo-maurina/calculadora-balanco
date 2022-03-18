@@ -1,37 +1,30 @@
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { useCalculadora } from "../contexts/CalculadoraProvider";
 import { BotaoOperacao } from "./BotaoOperacao";
 
 const NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export function Calculadora() {
-  const [operacaoAtual, setOperacaoAtual] = useState<string>("");
-  const { setCalculo, resultado, setResultado } = useCalculadora();
+  const { calculo, setCalculo, resultado, calculate } = useCalculadora();
 
   const createOperacaoAtual = (valor: string) => {
-    if (!parseFloat(valor)) calculate();
-    setOperacaoAtual((curValue) => curValue + valor);
+    if (!parseFloat(valor)) calculate(); // quando valor for operação
     setCalculo((curValue) => curValue + valor);
   };
 
-  const calculate = () => {
-    setResultado(eval(operacaoAtual));
-  };
-
-  const createKeypad = (): ReactNode => {
-    return (
-      <div className="grid grid-cols-3 gap-4 w-full">
-        {NUMBERS.map((number: number) => (
-          <div
-            className="btn-calculadora"
-            onClick={() => createOperacaoAtual(number.toString())}
-          >
-            {number}
-          </div>
-        ))}
-      </div>
-    );
-  };
+  const createKeypad = (): ReactNode => (
+    <div className="grid grid-cols-3 gap-4 w-full">
+      {NUMBERS.map((number: number, index: number) => (
+        <div
+          key={index.toString()}
+          className="btn-calculadora"
+          onClick={() => createOperacaoAtual(number.toString())}
+        >
+          {number}
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div
@@ -44,7 +37,7 @@ export function Calculadora() {
       >
         <div className="absolute bottom-1 right-2">
           <div id="valores-visor" className="text-gray-300 text-xl">
-            <p className="whitespace-nowrap">{operacaoAtual}</p>
+            <p className="whitespace-nowrap">{calculo}</p>
           </div>
           {resultado && (
             <div

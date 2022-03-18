@@ -2,23 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
-#root {
-  overflow-x: hidden;
-}
-
 @font-face {
   font-family: Calculator;
   src: url("../assets/fonts/Calculator.ttf");
 }
 
+.visorFont {
+  font-family: "Calculator";
+}
+
+/* Overrides */
+html,
+body,
+#root {
+  overflow-x: hidden;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* Componentes Tailwind */
 @layer components {
   .btn-calculadora {
     @apply bg-gray-700 w-[50px] h-[50px] min-w-[50px] text-gray-300 text-3xl grid place-items-center rounded hover:bg-gray-600 cursor-pointer;
   }
-}
-
-.visorFont {
-  font-family: "Calculator";
+  .numero-historico {
+    @apply border-none bg-transparent  focus-visible:outline-none p-0;
+  }
 }

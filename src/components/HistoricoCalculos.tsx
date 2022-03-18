@@ -1,14 +1,37 @@
+import { ChangeEvent } from "react";
 import { useCalculadora } from "../contexts/CalculadoraProvider";
 
 export function HistoricoCalculos() {
-  const { calculo, resultado } = useCalculadora();
+  const { calculo, setCalculo, resultado, setResultado } = useCalculadora();
+
+  const editCalculo = (e: ChangeEvent<HTMLInputElement>) => {
+    let splitCalc = calculo.split(" ");
+    splitCalc[parseInt(e.target.id)] = e.target.value.toString();
+    let stringCalc = splitCalc.join(" ");
+    setCalculo(stringCalc);
+    setResultado(eval(stringCalc));
+  };
 
   const createHistorico = () =>
-    calculo.split(" ").map((elemento) => {
-      if (parseFloat(elemento)) return <span>{elemento}</span>; //se for numero
-      return (
-        // se for sinal de operacao
-        <span className="text-gray-400">
+    calculo.split(" ").map((elemento, index) => {
+      const isNumber: boolean = !!parseFloat(elemento); // checar se é numero ou sinal de operação
+
+      return isNumber ? (
+        <input
+          key={index.toString()}
+          id={index.toString()}
+          type={"number"}
+          className="numero-historico"
+          value={elemento}
+          style={{ width: elemento.length + 0.3 + "ch" }}
+          onInput={editCalculo}
+        />
+      ) : (
+        <span
+          key={index.toString()}
+          id={index.toString()}
+          className="text-gray-400 bg-transparent"
+        >
           {elemento}
           <p></p>
         </span>
