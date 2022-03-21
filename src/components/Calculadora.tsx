@@ -7,7 +7,7 @@ const NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export function Calculadora() {
   const { calculo, setCalculo, resultado, calculate } = useCalculadora();
 
-  const createOperacaoAtual = (valor: string) => {
+  const createOperacaoAtual = (valor: string): void => {
     if (!parseFloat(valor)) calculate(); // quando valor for operação
     setCalculo((curValue) => curValue + valor);
   };

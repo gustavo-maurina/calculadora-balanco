@@ -10,7 +10,7 @@ export function KeyboardListener() {
       calculate();
     } catch (err) {}
 
-    const highlightKey = (key: string) => {
+    const highlightKey = (key: string): void => {
       const button = document.getElementById(key);
       button!.classList.add("pressed");
       setTimeout(() => {
@@ -18,7 +18,7 @@ export function KeyboardListener() {
       }, 300);
     };
 
-    const handleKeydown = (e: KeyboardEvent) => {
+    const handleKeydown = (e: KeyboardEvent): void => {
       if (
         document.activeElement?.className === "numero-historico" ||
         !ALLOWED_KEYS.includes(e.key)

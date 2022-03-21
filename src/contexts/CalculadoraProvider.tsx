@@ -27,7 +27,7 @@ export function CalculadoraProvider(props: any) {
   const [calculo, setCalculo] = useState<string>("");
   const [resultado, setResultado] = useState<number | null>(null);
 
-  const calculate = () => {
+  const calculate = (): void => {
     let strSplit = calculo.split(" ");
     strSplit = strSplit.filter((str) => str !== ""); // remover espaços vazios do Array
 
