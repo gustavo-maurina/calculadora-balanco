@@ -40,7 +40,7 @@ export function Calculadora() {
           <div id="valores-visor" className="text-gray-300 text-xl">
             <p className="whitespace-nowrap">{calculo}</p>
           </div>
-          {resultado !== null && (
+          {!!resultado && (
             <div
               id="valores-visor"
               className="text-gray-300 text-3xl text-right"
