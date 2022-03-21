@@ -19,7 +19,7 @@ export function KeyboardListener() {
     };
 
     // se for número, remove 1, se for espaço vazio(operação) remove 3
-    const handleBackspacePress = () =>
+    const handleBackspacePress = (): void =>
       setCalculo((atual) =>
         atual[atual.length - 1] === " "
           ? atual.slice(0, calculo.length - 3)
