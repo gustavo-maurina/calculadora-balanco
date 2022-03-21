@@ -7,9 +7,9 @@ export function HistoricoCalculos() {
   const editCalculo = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    let splitCalc = calculo.split(" ");
+    let splitCalc: string[] = calculo.split(" ");
     splitCalc[+e.target.id] = inputValue.length ? inputValue : "0";
-    let stringCalc = splitCalc.join(" ");
+    let stringCalc: string = splitCalc.join(" ");
     setCalculo(stringCalc);
     setResultado(eval(stringCalc));
   };
