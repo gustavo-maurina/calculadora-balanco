@@ -26,10 +26,17 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.btn-calculadora {
+  transition: 500ms;
+}
+
 /* Componentes Tailwind */
 @layer components {
   .btn-calculadora {
     @apply bg-gray-700 w-[50px] h-[50px] min-w-[50px] text-gray-300 text-3xl grid place-items-center rounded hover:bg-gray-600 cursor-pointer;
+  }
+  .pressed {
+    @apply bg-gray-900;
   }
   .numero-historico {
     @apply border-none bg-transparent  focus-visible:outline-none p-0;

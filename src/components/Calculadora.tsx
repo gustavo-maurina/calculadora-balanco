@@ -16,6 +16,7 @@ export function Calculadora() {
     <div className="grid grid-cols-3 gap-4 w-full">
       {NUMBERS.map((number: number, index: number) => (
         <div
+          id={(index + 1).toString()}
           key={index.toString()}
           className="btn-calculadora"
           onClick={() => createOperacaoAtual(number.toString())}
@@ -53,8 +54,16 @@ export function Calculadora() {
         <div id="numbers">
           {createKeypad()}
           <div id="last-line" className="flex pt-4 gap-4">
-            <BotaoOperacao createOperacao={createOperacaoAtual} valor={"0"} />
-            <BotaoOperacao createOperacao={createOperacaoAtual} valor={"."} />
+            <BotaoOperacao
+              id="0"
+              createOperacao={createOperacaoAtual}
+              valor={"0"}
+            />
+            <BotaoOperacao
+              id="."
+              createOperacao={createOperacaoAtual}
+              valor={"."}
+            />
             <div
               className="btn-calculadora bg-orange-500 hover:bg-orange-400"
               onClick={calculate}
@@ -65,10 +74,26 @@ export function Calculadora() {
         </div>
 
         <div id="operations" className="flex flex-col gap-4">
-          <BotaoOperacao createOperacao={createOperacaoAtual} valor={" + "} />
-          <BotaoOperacao createOperacao={createOperacaoAtual} valor={" - "} />
-          <BotaoOperacao createOperacao={createOperacaoAtual} valor={" * "} />
-          <BotaoOperacao createOperacao={createOperacaoAtual} valor={" / "} />
+          <BotaoOperacao
+            id="+"
+            createOperacao={createOperacaoAtual}
+            valor={" + "}
+          />
+          <BotaoOperacao
+            id="-"
+            createOperacao={createOperacaoAtual}
+            valor={" - "}
+          />
+          <BotaoOperacao
+            id="*"
+            createOperacao={createOperacaoAtual}
+            valor={" * "}
+          />
+          <BotaoOperacao
+            id="/"
+            createOperacao={createOperacaoAtual}
+            valor={" / "}
+          />
         </div>
       </div>
     </div>

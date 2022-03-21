@@ -10,12 +10,22 @@ export function KeyboardListener() {
       calculate();
     } catch (err) {}
 
+    const highlightKey = (key: string) => {
+      const button = document.getElementById(key);
+      button!.classList.add("pressed");
+      setTimeout(() => {
+        button!.classList.remove("pressed");
+      }, 300);
+    };
+
     const handleKeydown = (e: KeyboardEvent) => {
       if (
         document.activeElement?.className === "numero-historico" ||
         !ALLOWED_KEYS.includes(e.key)
       )
         return;
+
+      highlightKey(e.key);
 
       if (e.key === "Backspace")
         return setCalculo((atual) =>

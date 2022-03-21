@@ -1,11 +1,20 @@
 type BotaoOperacaoProps = {
   createOperacao: (valor: string) => void;
   valor: string;
+  id: string;
 };
 
-export function BotaoOperacao({ createOperacao, valor }: BotaoOperacaoProps) {
+export function BotaoOperacao({
+  createOperacao,
+  valor,
+  id,
+}: BotaoOperacaoProps) {
   return (
-    <div className="btn-calculadora" onClick={() => createOperacao(valor)}>
+    <div
+      id={id}
+      className="btn-calculadora"
+      onClick={() => createOperacao(valor)}
+    >
       {valor}
     </div>
   );
