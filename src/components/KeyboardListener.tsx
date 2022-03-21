@@ -19,8 +19,6 @@ export function KeyboardListener() {
     };
 
     const handleKeydown = (e: KeyboardEvent): void => {
-      console.log(e.key);
-
       if (
         document.activeElement?.className === "numero-historico" ||
         !ALLOWED_KEYS.includes(e.key)
