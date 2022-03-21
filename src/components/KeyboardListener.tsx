@@ -1,6 +1,24 @@
 import { useEffect } from "react";
 import { useCalculadora } from "../contexts/CalculadoraProvider";
 
+const ALLOWED_KEYS = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "0",
+  "+",
+  "-",
+  "/",
+  "*",
+  "Backspace",
+];
+
 export function KeyboardListener() {
   const { calculo, setCalculo, calculate } = useCalculadora();
 
@@ -10,10 +28,11 @@ export function KeyboardListener() {
     } catch (err) {}
 
     const handleKeydown = (e: KeyboardEvent) => {
+      console.log(e.key);
+
       if (
         document.activeElement?.className === "numero-historico" ||
-        e.key === "Shift" ||
-        e.key === "Enter"
+        !ALLOWED_KEYS.includes(e.key)
       )
         return;
 

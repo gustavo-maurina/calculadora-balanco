@@ -48,7 +48,8 @@ export function HistoricoCalculos() {
       </div>
       {resultado !== null && calculo.length > 0 && (
         <div className="text-5xl text-green-400 absolute bottom-3 right-3">
-          ={resultado}
+          {/* checar se valor é decimal ou não*/}=
+          {resultado % 1 === 0 ? resultado : resultado?.toFixed(2)}
         </div>
       )}
     </div>
