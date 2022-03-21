@@ -14,4 +14,5 @@ export const ALLOWED_KEYS = [
   "/",
   "*",
   "Backspace",
+  ".",
 ];

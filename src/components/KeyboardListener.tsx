@@ -27,7 +27,7 @@ export function KeyboardListener() {
       if (e.key === "+" || e.key === "-" || e.key === "/" || e.key === "*")
         return setCalculo((atual) => atual + ` ${e.key} `);
 
-      return setCalculo((atual) => atual + e.key);
+      setCalculo((atual) => atual + e.key);
     };
 
     window.addEventListener("keydown", handleKeydown);
