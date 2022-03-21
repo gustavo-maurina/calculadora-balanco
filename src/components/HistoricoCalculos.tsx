@@ -15,26 +15,26 @@ export function HistoricoCalculos() {
   };
 
   const createHistorico = () =>
-    calculo.split(" ").map((elemento, index) => {
-      const isNumber: boolean = !!parseFloat(elemento); // checar se é numero ou sinal de operação
+    calculo.split(" ").map((value, idx) => {
+      const isNumber: boolean = !!parseFloat(value); // checar se é numero ou sinal de operação
 
       return isNumber ? (
         <input
-          key={"historico" + index}
-          id={index.toString()}
+          key={"historico" + idx}
+          id={idx.toString()}
           type={"number"}
           className="numero-historico"
-          value={elemento}
-          style={{ width: elemento.length + 0.3 + "ch" }}
+          value={value}
+          style={{ width: value.length + 0.3 + "ch" }}
           onInput={editCalculo}
         />
       ) : (
         <span
-          key={index.toString()}
-          id={index.toString()}
+          key={idx.toString()}
+          id={idx.toString()}
           className="text-gray-400 bg-transparent"
         >
-          {elemento}
+          {value}
           <p></p>
         </span>
       );
