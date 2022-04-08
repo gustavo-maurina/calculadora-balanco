@@ -1,10 +1,10 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactNode } from "react";
 import { useCalculadora } from "../contexts/CalculadoraProvider";
 
 export function HistoricoCalculos() {
   const { calculo, setCalculo, resultado, setResultado } = useCalculadora();
 
-  const editCalculo = (e: ChangeEvent<HTMLInputElement>) => {
+  const editCalculo = (e: ChangeEvent<HTMLInputElement>): void => {
     const inputValue = e.target.value;
 
     let splitCalc: string[] = calculo.split(" ");
@@ -14,7 +14,7 @@ export function HistoricoCalculos() {
     setResultado(eval(stringCalc));
   };
 
-  const createHistorico = () =>
+  const createHistorico = (): ReactNode =>
     calculo.split(" ").map((value, idx) => {
       const isNumber: boolean = !!parseFloat(value); // checar se é numero ou sinal de operação
 
