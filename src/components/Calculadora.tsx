@@ -17,7 +17,7 @@ export function Calculadora() {
       {NUMBERS.map((number: number, index: number) => (
         <div
           id={(index + 1).toString()}
-          key={"key" + index}
+          key={index}
           className="btn-calculadora"
           onClick={() => createOperacaoAtual(number.toString())}
         >

@@ -20,7 +20,7 @@ export function HistoricoCalculos() {
 
       return isNumber ? (
         <input
-          key={"historico" + idx}
+          key={idx}
           id={idx.toString()}
           type={"number"}
           className="numero-historico"
