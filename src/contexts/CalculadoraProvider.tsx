@@ -18,7 +18,7 @@ const CalculadoraContext = createContext<CalculadoraContextProps>(
   {} as CalculadoraContextProps
 );
 
-export const useCalculadora = () => {
+export const useCalculadora = (): CalculadoraContextProps => {
   const context = useContext(CalculadoraContext);
   return context;
 };
