@@ -36,9 +36,7 @@ export function CalculadoraProvider(props: any) {
 
     // remover 0 do inicio dos numeros
     const strSem0NoInicio = strSplit
-      .map((numero) =>
-        numero[0] === "0" ? numero.slice(1, numero.length) : numero
-      )
+      .map((numero) => (numero[0] === "0" ? numero.slice(1) : numero))
       .join("");
 
     setResultado(eval(strSem0NoInicio));
